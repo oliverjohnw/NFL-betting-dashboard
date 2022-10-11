@@ -3,11 +3,11 @@ import pandas as pd
 
 from utilities import read_json
 
-spread_dict = read_json('../Output/spread_info.json')
-total_dict = read_json('../Output/total_info.json')
+spread_dict = read_json('../Output/spread_dict_week6.json')
+total_dict = read_json('../Output/totals_dict_week6.json')
 
 st.title ("NFL Betting Dashboard")
-st.header("Week 5 Games")
+st.header("Week 6 Games")
 
 for k,v in spread_dict.items():
     spread_team_var = k.split(" @")[0]
