@@ -1,13 +1,13 @@
 import argparse
 import logging
 import requests
-from utilities import write_json
+from utils import write_json
 
 def parse_args() -> argparse.Namespace:
     """Function to parse command line arguments"""
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('source_output_path', type=str, help='Path to the save source info - denotes if initial pull or throughout the week')
+    parser.add_argument('source_output_path', type=str, help='Path to the save source info')
     args = parser.parse_args()
 
     return args

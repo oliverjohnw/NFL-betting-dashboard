@@ -1,6 +1,7 @@
 import argparse
 import logging
-from utilities import read_json, write_json, create_weekly_matchups,create_weekly_game_source_info, scrape_weekly_spreads, scrape_weekly_totals
+from utils import read_json, write_json
+from config_helpers import parse_matchups_info, scrape_weekly_spreads, scrape_weekly_totals
 
 def parse_args() -> argparse.Namespace:
     """Function to parse command line arguments"""
@@ -31,13 +32,11 @@ def main():
     args = parse_args()
 
     logging.info("Loading source info")
-    weekly_games_dict = read_json('../Input/weekly_games.json')
     source_info = read_json(args.source_info_path)
 
-    weekly_matchup_dict = create_weekly_matchups(source_info)
-    weekly_info_dict = create_weekly_game_source_info(source_info)
-    weekly_spread_dict = scrape_weekly_spreads(weekly_info_dict)
-    weekly_totals_dict = scrape_weekly_totals(weekly_info_dict)
+    weekly_matchup_dict = parse_matchups_info(source_info)
+    weekly_spread_dict = scrape_weekly_spreads(weekly_matchup_dict)
+    weekly_totals_dict = scrape_weekly_totals(weekly_matchup_dict)
 
     logging.info("Saving configs")
     write_json(weekly_spread_dict, args.spread_dict_path)
